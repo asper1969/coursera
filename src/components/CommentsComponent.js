@@ -7,13 +7,25 @@ class Comments extends Component{
         const commentsList = comments.map((item) => {
 
             const {comment, author, date} = item;
+            const formatedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(date)));
 
             return (
                 <li>
                     <p className="text">{comment}</p>
                     <p className="info">
                         <span className="delimeter mr-2">--</span>
-                        <span className="date mr-2"> {date}</span>
+                        <span className="date mr-2">
+                            {/*{new Intl.DateTimeFormat(*/}
+                                {/*'en-US',*/}
+                                {/*{*/}
+                                    {/*year: 'numeric',*/}
+                                    {/*month: 'short',*/}
+                                    {/*day: '2-digit'*/}
+                                {/*}).format(new Date(Date.parse({date})))*/}
+                            {/*}*/}
+
+                            {formatedDate}
+                        </span>
                         <span className="name"> {author}</span>
                     </p>
                 </li>
@@ -31,7 +43,7 @@ class Comments extends Component{
     }
 
     render(){
-        const {comments} = this.props.dish;
+        const {comments} = this.props;
 
         return(
           this.renderComment(comments)
