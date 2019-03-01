@@ -8,6 +8,8 @@ import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Contact from './ContactComponent';
+import About from './AboutComponent';
+
 import {DISHES} from '../shared/dishes';
 import {PROMOTIONS} from '../shared/propmotions';
 import {COMMENTS} from '../shared/comments';
@@ -29,7 +31,6 @@ class Main extends Component {
     render() {
 
         const HomePage = () => {
-            console.log(this.state.promotions.filter((promo) => promo.featured)[0])
 
             return (
                 <Home
@@ -42,7 +43,7 @@ class Main extends Component {
 
         const DishWithId = ({match}) => {
 
-            return(
+            return (
                 <DishDetail
                     dish={this.state.dishes.filter(
                         (dish) => dish.id === this.state.selectedDish)[0]
@@ -59,19 +60,25 @@ class Main extends Component {
                 <Header />
                 <Switch>
                     <Route path="/home" component={HomePage}/>
+                    <Route exact path="/aboutus" component={
+                                () => <div>
+                                    <About leaders={LEADERS}/>
+                                </div>
+                            }
+                    />
                     <Route exact path="/menu"
                            component={
                                () => <div>
-                                           <Menu
-                                               dishes={this.state.dishes}
-                                               onClick={
-                                                   (dishId) => this.onDishSelect(dishId)
-                                               }/>
-                                     </div>
+                                   <Menu
+                                       dishes={this.state.dishes}
+                                       onClick={
+                                           (dishId) => this.onDishSelect(dishId)
+                                       }/>
+                               </div>
                            }
                     />
-                    <Route path='/menu/:dishId' component={DishWithId} />
-                    <Route exact path="/contactus" component={Contact} />
+                    <Route path='/menu/:dishId' component={DishWithId}/>
+                    <Route exact path="/contactus" component={Contact}/>
                     <Redirect to="/home"/>
                 </Switch>
                 <Footer />
