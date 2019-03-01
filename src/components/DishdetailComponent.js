@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap';
+import {Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import { Link } from 'react-router-dom';
 import Comment from './CommentsComponent';
 
-function RenderDish(dish){
+function RenderDish(dish,comments){
 
-    const {image,name,description,comments} = dish;
+    const {image,name,description} = dish;
 
     return(
         <div className="row">
@@ -26,11 +27,22 @@ function RenderDish(dish){
 
 const Dishdetail = (props) => {
 
-    const {dish} = props;
+    const {dish,comments} = props;
 
     return (
         <div className="container">
-            {RenderDish(dish)}
+            <Breadcrumb>
+                <BreadcrumbItem>
+                    <Link to="/home">Home</Link>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                    <Link to="/menu">Menu</Link>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                    {dish.name}
+                </BreadcrumbItem>
+            </Breadcrumb>
+            {RenderDish(dish,comments)}
         </div>
     );
 };
