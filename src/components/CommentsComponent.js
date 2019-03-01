@@ -11,7 +11,7 @@ function RenderComment(comments){
             <li key={id}>
                 <p className="text">{comment}</p>
                 <p className="info">
-                    <span className="delimeter mr-2">--</span>
+                    <span className="dilimeter mr-2">--</span>
                     <span className="date mr-2">
                             {formatedDate}
                         </span>
